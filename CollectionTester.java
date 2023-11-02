@@ -16,57 +16,88 @@ public class CollectionTester implements CollectionTest{
         this.size = size;
     }
 
-    public void createCollection(CollectionType type, int iterations)
-    {
+    public void testLinkedList(TestType type, int iterations) {
+        int num = iterations/2;
+        LinkedList<Person> linked_list = new LinkedList<Person>();
         switch (type) {
-            case LINKED_LIST -> {
-                LinkedList<Person> linked_list = new LinkedList<Person>();
-                for (int i = 0;i < iterations; i++){
-                    linked_list.add(new Person("Person"+i,i));
+            case ADD -> {
+                for (int i = 0; i < iterations; i++) {
+                    linked_list.add(new Person("Person" + i, i));
                 }
             }
-            case ARRAY_LIST -> {
-                ArrayList<Person> array_list = new ArrayList<Person>();
+            case INDEX -> {
+                System.out.println(linked_list.get(num));
+            }
+
+            case SEARCH -> {
+                String query = "Person"+num;
+
+                int i = 0;
+                while(linked_list.get(i).getName() != query) {
+                    i++;
+                }
+                System.out.println(linked_list.get(i));
+            }
+        }
+    }
+
+
+    public void testArrayList(TestType type, int iterations){
+        int num = iterations/2;
+        ArrayList<Person> array_list = new ArrayList<Person>();
+        switch (type){
+            case ADD -> {
                 for (int i = 0; i < iterations; i++){
                     array_list.add(new Person("Person"+i,i));
                 }
             }
-            case HASH_MAP -> {
-                HashMap<Person, String> hash_map = new HashMap<Person, String>();
+            case INDEX -> {
+
+                System.out.println(array_list.get(num));
+            }
+            case SEARCH -> {
+                String query = "Person"+num;
+
+                int i = 0;
+                while(array_list.get(i).getName() != query) {
+                    i++;
+                }
+                System.out.println(array_list.get(i));
+            }
+        }
+    }
+
+    public void testHashMap(TestType type, int iterations){
+        HashMap<Person, Integer> hash_map = new HashMap<Person, Integer>();
+        switch (type){
+            case ADD -> {
                 for (int i = 0; i < iterations; i++){
-                    hash_map.put(new Person("Person"+i,i), String.valueOf(i));
+                    hash_map.put(new Person("Person"+i,i), i);
                 }
             }
-        }
-    }
-
-    public void indexTest(CollectionType type, int iterations){
-        int index = iterations/2;
-
-        switch (type){
-            case LINKED_LIST -> {
+            case INDEX -> {
+                int num = iterations/2;
+                System.out.println(hash_map.get(num));
+            }
+            case SEARCH -> {
 
             }
         }
     }
+
 
     @Override
     public void runTest(CollectionType type, TestType test, int iterations) {
 
-        switch (test) {
-            case ADD -> {
-                //create a new collection of the given type and populate it with size unique instances of a person (as defined in setSize
-                this.createCollection(type, iterations);
+        switch (type) {
+            case LINKED_LIST -> {
+                this.testLinkedList(test,iterations);
             }
-            case INDEX -> {
-                //retrieve an item from the collection based on its index in that collection, position should be approx halfway through collection
-
+            case ARRAY_LIST -> {
+                this.testArrayList(test,iterations);
             }
-            case SEARCH -> {
-                //retrieve item from collection based on Person's name
-                for (int i = 0; i < iterations; i++) {
-
-                }
+            case HASH_MAP -> {
+                this.testHashMap(test,iterations);
             }
         }
     }
