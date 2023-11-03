@@ -8,8 +8,10 @@ public class CollectionTester implements CollectionTest{
     private int size;
     public CollectionTester()
     {
-        this.size = 100;
+        this.runTest(CollectionType.ARRAY_LIST,TestType.ADD,10);
     }
+
+
     @Override
     public void setSize(int size) {
     //Defines the size of the collections that should be created when the ADD test is run.
@@ -24,6 +26,7 @@ public class CollectionTester implements CollectionTest{
                 for (int i = 0; i < iterations; i++) {
                     linked_list.add(new Person("Person" + i, i));
                 }
+                System.out.println(linked_list);
             }
             case INDEX -> {
                 System.out.println(linked_list.get(num));
@@ -50,6 +53,7 @@ public class CollectionTester implements CollectionTest{
                 for (int i = 0; i < iterations; i++){
                     array_list.add(new Person("Person"+i,i));
                 }
+                System.out.println(array_list);
             }
             case INDEX -> {
 
@@ -68,19 +72,21 @@ public class CollectionTester implements CollectionTest{
     }
 
     public void testHashMap(TestType type, int iterations){
-        HashMap<Person, Integer> hash_map = new HashMap<Person, Integer>();
+        int num = iterations/2;
+        HashMap<Integer, Person> hash_map = new HashMap<>();
         switch (type){
             case ADD -> {
                 for (int i = 0; i < iterations; i++){
-                    hash_map.put(new Person("Person"+i,i), i);
+                    hash_map.put(i,new Person("Person"+i,i));
                 }
+                System.out.println(hash_map);
             }
             case INDEX -> {
-                int num = iterations/2;
                 System.out.println(hash_map.get(num));
             }
             case SEARCH -> {
-
+                Person query = new Person("Person"+num,num) ;
+                System.out.println(hash_map.containsValue(query));
             }
         }
     }
