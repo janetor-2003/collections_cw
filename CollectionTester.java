@@ -6,9 +6,14 @@ public class CollectionTester implements CollectionTest{
 
     private Person person;
     private int size;
+
+    LinkedList<Person> linked_list = new LinkedList<Person>();
+    ArrayList<Person> array_list = new ArrayList<Person>();
+    HashMap<Integer, Person> hash_map = new HashMap<>();
+
     public CollectionTester()
     {
-        this.runTest(CollectionType.ARRAY_LIST,TestType.ADD,10);
+
     }
 
 
@@ -20,13 +25,14 @@ public class CollectionTester implements CollectionTest{
 
     public void testLinkedList(TestType type, int iterations) {
         int num = iterations/2;
-        LinkedList<Person> linked_list = new LinkedList<Person>();
+
         switch (type) {
             case ADD -> {
                 for (int i = 0; i < iterations; i++) {
                     linked_list.add(new Person("Person" + i, i));
                 }
                 System.out.println(linked_list);
+
             }
             case INDEX -> {
                 System.out.println(linked_list.get(num));
@@ -36,10 +42,11 @@ public class CollectionTester implements CollectionTest{
                 String query = "Person"+num;
 
                 int i = 0;
-                while(linked_list.get(i).getName() != query) {
+                while(!(query.equals(linked_list.get(i).getName()))) {
                     i++;
                 }
                 System.out.println(linked_list.get(i));
+
             }
         }
     }
@@ -47,13 +54,14 @@ public class CollectionTester implements CollectionTest{
 
     public void testArrayList(TestType type, int iterations){
         int num = iterations/2;
-        ArrayList<Person> array_list = new ArrayList<Person>();
+
         switch (type){
             case ADD -> {
                 for (int i = 0; i < iterations; i++){
                     array_list.add(new Person("Person"+i,i));
                 }
                 System.out.println(array_list);
+
             }
             case INDEX -> {
 
@@ -63,7 +71,7 @@ public class CollectionTester implements CollectionTest{
                 String query = "Person"+num;
 
                 int i = 0;
-                while(array_list.get(i).getName() != query) {
+                while(!(query.equals(array_list.get(i).getName()))) {
                     i++;
                 }
                 System.out.println(array_list.get(i));
@@ -73,13 +81,15 @@ public class CollectionTester implements CollectionTest{
 
     public void testHashMap(TestType type, int iterations){
         int num = iterations/2;
-        HashMap<Integer, Person> hash_map = new HashMap<>();
+
         switch (type){
             case ADD -> {
+
                 for (int i = 0; i < iterations; i++){
                     hash_map.put(i,new Person("Person"+i,i));
                 }
                 System.out.println(hash_map);
+
             }
             case INDEX -> {
                 System.out.println(hash_map.get(num));
@@ -105,6 +115,7 @@ public class CollectionTester implements CollectionTest{
             case HASH_MAP -> {
                 this.testHashMap(test,iterations);
             }
+
         }
     }
 }
