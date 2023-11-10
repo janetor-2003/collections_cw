@@ -23,6 +23,11 @@ public class CollectionTester implements CollectionTest{
         this.size = size;
     }
 
+    /**
+     * Runs test for linked list
+     * @param type type of test
+     * @param iterations number of iterations
+     */
     public void testLinkedList(TestType type, int iterations) {
         int num = iterations/2;
 
@@ -51,7 +56,11 @@ public class CollectionTester implements CollectionTest{
         }
     }
 
-
+    /**
+     * Runs test for array list
+     * @param type type of test
+     * @param iterations number of iterations
+     */
     public void testArrayList(TestType type, int iterations){
         int num = iterations/2;
 
@@ -79,6 +88,11 @@ public class CollectionTester implements CollectionTest{
         }
     }
 
+    /**
+     * Runs test for hash map
+     * @param type type of test
+     * @param iterations number of iterations
+     */
     public void testHashMap(TestType type, int iterations){
         int num = iterations/2;
 
